@@ -2,5 +2,5 @@
 here you can find my LDS material
 
 # Deque
-Nó_Simples - Deck structure created with singly linked list  
-Nó_Duplo - Deck structure created with doubly linked list
+No_Simples - Deck structure created with singly linked list  
+No_Duplo - Deck structure created with doubly linked list
