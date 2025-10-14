@@ -1,4 +1,5 @@
-import java.util.Arrays;
+import java.util.Arrays; // Segestão de Lucas
+
 public class Rubro {
     // Vermelha Cresce
     // Preta Diminui
@@ -16,8 +17,9 @@ public class Rubro {
 
     private void increaseCapacity() {
         int newCapacity = this.capacity*2;
-        int newSizeP = newCapacity - realSizeP();
         Object[] newList = new Object[newCapacity];
+
+        int newSizeP = newCapacity - realSizeP();
 
         for (int i = 0; i < this.sizeV; i++)
             newList[i] = this.lista[i];
@@ -30,10 +32,12 @@ public class Rubro {
     }
     private void decreaseCapacity() {
         int newCapacity = this.capacity/2;
-        int newSizeP = newCapacity - realSizeP();
-        Object[] newList = new Object[newCapacity];
         if (newCapacity < 1)
             newCapacity = 1;
+
+        Object[] newList = new Object[newCapacity];
+
+        int newSizeP = newCapacity - realSizeP();
 
         for (int i = 0; i < this.sizeV; i++)
             newList[i] = this.lista[i];
@@ -50,6 +54,7 @@ public class Rubro {
         return this.capacity - this.sizeP;
     }
 
+
     private int totalSize() {
         return realSizeP() + this.sizeV;
     }
@@ -62,6 +67,7 @@ public class Rubro {
     public void pushP(Object value) {
         if (sizeP <= sizeV)
             increaseCapacity();
+
         this.lista[--sizeP] = value;
     }
     public boolean isEmptyV() {
@@ -71,9 +77,13 @@ public class Rubro {
         return realSizeP() == 0;
     }
     public Object topP() {
+        if (isEmptyP())
+            throw new RuntimeException("topo Preto Vazio");
         return lista[sizeP];
     }
     public Object topV() {
+        if (isEmptyV())
+            throw new RuntimeException("Topo Vermelho Vazio");
         return lista[sizeV-1];
     }
 
@@ -81,7 +91,7 @@ public class Rubro {
         if (this.sizeV == 0)
             throw new RuntimeException("Pilha vermelha vazia :( ");
         // ACHO que é para aparecer o valor que vai ser deletado entao
-        Object o = lista[sizeV-1];
+        Object o = this.lista[sizeV-1];
         if (totalSize() <= capacity/3)
             decreaseCapacity();
         this.lista[sizeV-1] = null;
@@ -92,23 +102,23 @@ public class Rubro {
         if (this.sizeP == capacity)
             throw new RuntimeException("Pilha preta vazia :( ");
         // ACHO que é para aparecer o valor que vai ser deletado entao
-        Object o = lista[sizeP];
+        Object o = this.lista[sizeP];
         if (totalSize() <= capacity/3)
             decreaseCapacity();
-            
         this.lista[sizeP] = null;
         this.sizeP++;
         return o;
     }
 
-    private int getSizeP () {
+    public int getSizeP () {
         return realSizeP();
     }
-    private int getSizeV () {
+
+    public int getSizeV () {
         return sizeV;
     }
     public void arrayCheck () {
-        System.out.println(Arrays.toString(lista));
+        System.out.println(Arrays.toString(lista)); // Segestão de Lucas
     }
     public int getCapacity() {
         return capacity;
